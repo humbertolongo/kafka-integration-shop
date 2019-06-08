@@ -13,8 +13,7 @@ public class Utils {
 
     public static <T extends Message> Optional<T> mapMessage(String messageString, Class<T> className) {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            ObjectMapper objectMapper = buildObjectMapper();
             T message = objectMapper.readValue(messageString, className);
             return Optional.of(message);
         } catch (IOException e) {
@@ -25,8 +24,7 @@ public class Utils {
 
     public static <T extends Message> Optional<T> readMessage(ConsumerRecord<String, String> record, Class<T> className) {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            ObjectMapper objectMapper = buildObjectMapper();
             T message = objectMapper.readValue(record.value(), className);
             return Optional.of(message);
         } catch (IOException e) {
@@ -38,12 +36,17 @@ public class Utils {
 
     public static <T extends Message> String writeMessage(T object) {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            ObjectMapper objectMapper = buildObjectMapper();
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return "";
         }
+    }
+
+    public static ObjectMapper buildObjectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return objectMapper;
     }
 }

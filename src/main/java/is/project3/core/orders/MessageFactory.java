@@ -22,6 +22,4 @@ public class MessageFactory {
         return new OwnerOrder(quantity, product);
     }
 
-/*    public static <T extends Message> T emptyMessageOf (Class<T> className) {
-    }*/
 }

@@ -10,9 +10,6 @@ public class ItemDAO implements DAO<Item> {
 
     private EntityManager em;
 
-/*    public ItemDAO() {
-        this.em = PersistenceManager.INSTANCE.getEntityManager();
-    }*/
 
     public ItemDAO(EntityManager em) {
         this.em = em;
@@ -45,12 +42,6 @@ public class ItemDAO implements DAO<Item> {
     }
 
     @Override
-    public void update(Item item, String[] params) {
-        item.setPrice(Integer.parseInt(params[0]));
-        item.setStock(item.getStock() + Integer.parseInt(params[1]));
-        executeAsTransaction(entityManager -> entityManager.merge(item));
-    }
-
     public void update(Item itemToUpdate) {
 
         Optional<Item> itemOptional = get(itemToUpdate.getId());
