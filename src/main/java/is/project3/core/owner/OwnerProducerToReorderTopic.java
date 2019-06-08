@@ -19,7 +19,7 @@ public class OwnerProducerToReorderTopic implements Runnable {
     public void run() {
         Producer<String, String> producer = KafkaProducerFactory.createProducerSS();
 
-        producer.send(new ProducerRecord<>(REORDER_TOPIC, "TesteOwner", Utils.writeMessage(ownerOrder)));
+        producer.send(new ProducerRecord<>(REORDER_TOPIC, "Owner", Utils.writeMessage(ownerOrder)));
 
         System.out.println("Owner REQUEST: " + ownerOrder);
 
