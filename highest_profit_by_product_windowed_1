@@ -1,0 +1,2 @@
+java -cp target/project3.jar is.project3.rest.MyRESTClient "http://localhost:9998/admin_manager/highest_profit_by_item_windowed" 1
+
